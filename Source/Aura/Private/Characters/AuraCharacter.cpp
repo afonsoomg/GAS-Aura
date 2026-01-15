@@ -7,11 +7,12 @@
 #include "Player/AuraPlayerState.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include <AbilitySystem/AuraAttributeSet.h>
 
 AAuraCharacter::AAuraCharacter()
 {
 	// Camera Boom Configuration
-	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
+	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->bUsePawnControlRotation = false; 
 	CameraBoom->TargetArmLength = 750.0f;
@@ -23,7 +24,7 @@ AAuraCharacter::AAuraCharacter()
 	CameraBoom->bInheritRoll = false;
 
 	// Follow Camera Configuration
-	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
+	FollowCamera = CreateDefaultSubobject<UCameraComponent>("FollowCamera");
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
 
@@ -60,8 +61,8 @@ void AAuraCharacter::InitAbilityActorInfo()
 {
 	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
 	checkf(AuraPlayerState, TEXT("AAuraCharacter::InitAbilityActorInfo() - PlayerState is nullptr. AAuraCharacter requires a AAuraPlayerState."));
-	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
-
 	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
 	AttributeSet = AuraPlayerState->GetAttributeSet();
+	
+	AbilitySystemComponent->InitAbilityActorInfo(AuraPlayerState, this);
 }
