@@ -12,7 +12,7 @@
 AAuraCharacter::AAuraCharacter()
 {
 	// Camera Boom Configuration
-	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
+	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->bUsePawnControlRotation = false; 
 	CameraBoom->TargetArmLength = 750.0f;
@@ -24,7 +24,7 @@ AAuraCharacter::AAuraCharacter()
 	CameraBoom->bInheritRoll = false;
 
 	// Follow Camera Configuration
-	FollowCamera = CreateDefaultSubobject<UCameraComponent>("FollowCamera");
+	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
 
