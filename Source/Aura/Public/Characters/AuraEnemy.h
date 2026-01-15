@@ -23,6 +23,4 @@ public:
 		virtual void UnHighlightActor() override;
 		/** ~End of IEnemyInterface   */
 
-	UPROPERTY(BlueprintReadOnly, Category = "Debug")
-	bool bDebugHighlighted = false;
 };
