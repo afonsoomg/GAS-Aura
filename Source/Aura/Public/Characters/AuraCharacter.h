@@ -8,7 +8,7 @@
 
 class UCameraComponent;
 class USpringArmComponent;
-
+class AAuraPlayerState;
 /**
  * 
  */
@@ -20,10 +20,16 @@ class AURA_API AAuraCharacter : public AAuraCharacterBase
 public:
 	AAuraCharacter();
 
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<USpringArmComponent> CameraBoom;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<UCameraComponent> FollowCamera;
+
+private:
+	void InitAbilityActorInfo();
 };

@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Characters/AuraCharacterBase.h"
 #include "Interaction/EnemyInterface.h"
-
 #include "AuraEnemy.generated.h"
 
 /**
@@ -18,9 +17,11 @@ class AURA_API AAuraEnemy : public AAuraCharacterBase, public IEnemyInterface
 public:
 		AAuraEnemy();
 
-	    /** ~Begin of IEnemyInterface   */
+	    /** ~Begin IEnemyInterface   */
 		virtual void HighlightActor() override;
 		virtual void UnHighlightActor() override;
-		/** ~End of IEnemyInterface   */
+		/** ~End IEnemyInterface   */
 
+protected:
+		virtual void BeginPlay() override;
 };

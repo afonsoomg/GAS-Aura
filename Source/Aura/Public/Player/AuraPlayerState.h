@@ -20,9 +20,9 @@ class AURA_API AAuraPlayerState : public APlayerState, public IAbilitySystemInte
 public:
 	AAuraPlayerState();
 
-	//* ~Begin IAbilitySystemInterface */
+	//~ Begin IAbilitySystemInterface interface
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	//* ~End IAbilitySystemInterface */
+	//~ End IAbilitySystemInterface interface
 
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
