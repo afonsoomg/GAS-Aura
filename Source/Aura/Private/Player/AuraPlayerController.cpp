@@ -60,10 +60,12 @@ void AAuraPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	checkf(AuraMappingContext, TEXT("AuraMappingContext is null in AuraPlayerController. Please set it in the Blueprint derived class."));
+	
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-
-	checkf(Subsystem, TEXT("Enhanced Input Local Player Subsystem is null in AuraPlayerController. Make sure Enhanced Input plugin is enabled."));
-	Subsystem->AddMappingContext(AuraMappingContext, 0);
+	if (Subsystem)
+	{
+		Subsystem->AddMappingContext(AuraMappingContext, 0);
+	}
 		
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Default;
