@@ -7,6 +7,32 @@
 #include "AbilitySystemComponent.h"
 #include "AuraAttributeSet.generated.h"
 
+class UAbilitySystemComponent;
+class AActor;
+class AController;
+class ACharacter;
+
+USTRUCT()
+struct FEffectProperties
+{
+	GENERATED_BODY()
+
+	FEffectProperties() {};
+
+	FGameplayEffectContextHandle EffectContextHandle;
+
+	UAbilitySystemComponent* SourceAbilitySystemComponent = nullptr;
+	AActor* SourceAvatarActor = nullptr;
+	AController* SourceController = nullptr;
+	ACharacter* SourceCharacter = nullptr;
+
+	UAbilitySystemComponent* TargetAbilitySystemComponent = nullptr;
+	AActor* TargetAvatarActor = nullptr;
+	AController* TargetController = nullptr;
+	ACharacter* TargetCharacter = nullptr;
+
+};
+
 /**
  * 
  */
@@ -17,6 +43,10 @@ class AURA_API UAuraAttributeSet : public UAttributeSet
 public:
 	UAuraAttributeSet();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+
+	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "Vital Attributes")
 	FGameplayAttributeData Health;
@@ -45,4 +75,7 @@ public:
 
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+
+private:
+	FEffectProperties SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& EffectProperties) const;
 };
